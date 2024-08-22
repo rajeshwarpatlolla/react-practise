@@ -1,11 +1,14 @@
+import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import './App.css';
 import Counter from './Counter';
+import Time from './Time';
 import { increment, decrement } from './store/counterActions';
 
 function App() {
   const counter = useSelector((state) => state.count.value);
+  const [showTimer, setShowTimer] = useState(false);
 
   const dispatch = useDispatch();
 
@@ -24,6 +27,10 @@ function App() {
       <Counter />
       <button onClick={() => dispatch(increment())}>Increase</button>
       <button onClick={decrementCounterValue}>Decrease</button>
+      <div>
+        <button onClick={() => setShowTimer(!showTimer)}>{showTimer ? 'Stop Timer' : 'Start Timer'}</button>
+      </div>
+      {showTimer && <Time />}
     </div>
   );
 }
